@@ -30,7 +30,6 @@ class Planet(db.Model, SerializerMixin):
 
     # Add serialization rules
 
-
 class Scientist(db.Model, SerializerMixin):
     __tablename__ = 'scientists'
 
@@ -59,10 +58,11 @@ class Mission(db.Model, SerializerMixin):
 
     # Add relationships
     planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'), nullable = False)
+
     scientist_id = db.Column(db.Integer, db.ForeignKey('scientists.id'), nullable = False)
 
     # Add serialization rules
-    serialize_rules = ('-planet','-scientist')
+    serialize_rules = ('-planet.missions','-scientist.missions')
 
     # Add validation
     
